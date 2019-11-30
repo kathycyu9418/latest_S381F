@@ -1,12 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const Restaurant = require('./model/restaurant.model.js');
 const User = require('./model/user.model.js');
+const expressValidator = require('express-validator');
 const fs = require('fs');
 const formidable = require('formidable');
 const app = express();
-const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const mongourl = 'mongodb+srv://lauwa:1027@cluster0-7cnzq.mongodb.net/test?retryWrites=true&w=majority';
 const dbName = 'test';
@@ -29,7 +30,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(methodOverride('_method'));
 
 const key1 = "I go to school by bug";
 const key2 = "since 2017";

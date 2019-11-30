@@ -1,0 +1,10 @@
+<% include partials/header %>
+
+<h1>Restaurant</h1>
+<%restaurants.forEach((restaurant)=> {%>
+    <div>
+        <h2><a href='/restaurants/<%=restaurant._id%>'><%=restaurant.name%></a></h2>
+
+    </div>
+<% })%>
+<% include partials/footer %>

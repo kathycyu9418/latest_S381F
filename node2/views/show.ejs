@@ -1,0 +1,46 @@
+<% include partials/header %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form</title>
+</head>
+
+<body>
+    <div class="ui main text container segment">
+        <div class="ui huge header"><%=restaurant.name%></div>
+
+
+        <div class='ui top attached segment'>
+
+            <div class='description'>
+                <p>Borough: <%=restaurant.borough%></p>
+                <p>Cuisine: <%=restaurant.cuisine%></p>
+                <p>Street: <%=restaurant.address.street%></p>
+                <p>Building: <%=restaurant.address.building%></p>
+                <p>Zipcode: <%=restaurant.address.zipcode%></p>
+                <%if(restaurant.photo) {%>
+                <p>Restaurant image</P>
+                <img src=" data:<%=restaurant.mimetype%>;base64, <%=restaurant.photo%>" style="width:100%">
+                <%}%>
+                <%if(restaurant.address.coord[0] != null && restaurant.address.coord[1] != null) {%>
+                <p>GPS</p>
+                <p>Latitude: <%=restaurant.address.coord[0]%></p>
+                <p>Longitude: <%=restaurant.address.coord[1]%></p>
+                <a href='/map?lat=<%=restaurant.address.coord[0]%>&lon=<%=restaurant.address.coord[1]%>&zoom=15'>MAP</a>
+                <%}%>
+            </div>
+        </div>
+
+        <a href='/restaurants/<%=restaurant._id%>/edit' class='ui basic red button'>Edit</a>
+        <button onclick='deleteFunction("<%=restaurant._id%>")' id='delete' class='ui red basic button'>Delete</button>
+        <a href='/restaurants/' class='ui basic red button'>Go Back</a>
+    </div>
+    <script type="text/javascript" src='/js/crud.js'></script>
+</body>
+</html>
+
+<% include partials/footer %>

@@ -1,0 +1,41 @@
+<% include partials/header %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form</title>
+</head>
+<body>
+    <div class="ui main text container segment">
+        <div class="ui huge header"> Edit <%= restaurant.name%></div>
+          <form action="/restaurants/<%=restaurant._id%>/?_method=put" method="post" enctype="multipart/form-data" class="ui form">
+            <div class="field">
+                <label> Name: </label>
+                <input type="text" name="name" placeholder="name" value="<%=restaurant.name%>"/>
+                <label> Borough: </label>
+                <input type="text" name="borough" placeholder="borough" value="<%=restaurant.borough%>"/>
+                <label> Cuisine: </label>
+                <input type="text" name="cuisine" placeholder="cuisine" value="<%=restaurant.cuisine%>"/>
+                <label> Street: </label>
+                <input type="text" name="street" placeholder="street" value="<%=restaurant.address.street%>"/>
+                <label> Building: </label>
+                <input type="text" name="building" placeholder="building" value="<%=restaurant.address.building%>"/>
+                <label> Zipcode: </label>
+                <input type="text" name="zipcode" placeholder="zipcode" value="<%=restaurant.address.zipcode%>"/>
+                <label> Coordinator </label>
+                <label> Latitude: </label>
+                <input type="text" name="Latitude" placeholder="Latitude" value="<%=restaurant.address.coord[0]%>"/>
+                <label> Longitude: </label>
+                <input type="text" name="Longitude" placeholder="Longitude" value="<%=restaurant.address.coord[1]%>"/>
+                <label> Photo: </label>
+                <input type='file' name='filetoupload' />
+            </div>
+                <input type="submit" class="ui violet basic button"/>
+          </form>
+    </div>
+</body>
+</html>
+
+<% include partials/footer %></div>

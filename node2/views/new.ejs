@@ -1,0 +1,45 @@
+<% include partials/header %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form</title>
+</head>
+
+<body>
+    <div class="ui main text container segment">
+        <div class="ui huge header"> New Restaurant</div>
+        <form name="form" action="/restaurants" method="POST" enctype="multipart/form-data" class="ui form">
+
+            <div class="field">
+                <label> Name: </label>
+                <input type="text" name="name" placeholder="name">
+                <label> Borough: </label>
+                <input type="text" name="borough" placeholder="borough">
+                <label> Cuisine: </label>
+                <input type="text" name="cuisine" placeholder="cuisine">
+                <label> Street: </label>
+                <input type="text" name="street" placeholder="street">
+                <label> Building: </label>
+                <input type="text" name="building" placeholder="building">
+                <label> Zipcode: </label>
+                <input type="text" name="zipcode" placeholder="zipcode">
+                <label> Coordinator </label>
+                <label> Latitude: </label>
+                <input type="text" name="Latitude" placeholder="zipcode">
+                <label> Longitude: </label>
+                <input type="text" name="Longitude" placeholder="zipcode">
+                <label> Photo: </label>
+                <input type='file' name='filetoupload' />
+                <input type="submit" value="Create" class="ui violet basic button">
+          </div>
+        </form>
+    </div>
+</body>
+
+</html>
+
+<% include partials/footer %>

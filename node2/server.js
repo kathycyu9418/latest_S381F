@@ -69,19 +69,20 @@ app.post('/register',(req, res) => {
   if(result.error){
     console.log(result.error);
     res.status(400).send(result.error.details[0].message);
-  }
-  User.findOne({name:req.body.name}).exec(function (err, user) {
-    if(user){
-      res.send("User exist!")
-    }else{
-      let user = new User(req.body);
-      user.save(function (err) {
-        if (err) return handleError(err);
-        // saved!
-        res.send("success");
-    })
-  }
+  }else{
+    User.findOne({name:req.body.name}).exec(function (err, user) {
+      if(user){
+        res.send("User exist!")
+      }else{
+        let user = new User(req.body);
+        user.save(function (err) {
+          if (err) return handleError(err);
+          // saved!
+          res.send("success");
+        });
+      }
   });
+}
 });
 
 app.post('/login', (req, res) => {
@@ -305,4 +306,4 @@ app.get('/map', redirectLogin,(req, res) => {
   console.log(req.query.lat);
 });
 
-app.listen(process.env.PORT || 8098);
+app.listen(process.env.PORT || 3000);

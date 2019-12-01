@@ -196,13 +196,38 @@ app.get('/restaurants/:id', (req, res) => {
     }
   })
 });
+//Rate
+app.get('/restaurants/rate/:id', (req, res) => {
+  let id = ObjectID(req.params.id);
+  Restaurant.findOne({$and:[{"grades.user": req.session.username}, {_id:id}]}, (error, foundRestaurant) => {
+    assert.equal(error,null);
+    if(foundRestaurant){
+      console.log(foundRestaurant);
+      res.status(401).render('handleMessage.ejs', {message:"Your already Rated!"});
+    }else{
+      Restaurant.findById(req.params.id, (error, result) => {
+       assert.equal(error,null);
+       res.render('rate', { restaurant: result });
+     });
+   };
+ });
+});
 
+app.put('/restaurants/rate/:id', (req, res) => {
+  Restaurant.findById(req.params.id, (error, foundRestaurant) => {
+    assert.equal(error,null);
+    foundRestaurant.grades.push({user:req.session.username, score: req.body.score});
+    foundRestaurant.save(function(err, updatedResult) {
+       assert.equal(err,null);
+       res.status(302).redirect(`/restaurants/${req.params.id}`);
+     })
+  });
+});
 //EDIT
 app.get('/restaurants/:id/edit', (req, res) => {
   Restaurant.findById(req.params.id, (error, foundRestaurant) => {
     assert.equal(error,null);
     if(foundRestaurant.owner == req.session.username){
-      console.log(foundRestaurant);
       res.render('edit', { restaurant: foundRestaurant });
     }else{
       res.status(401).render('handleMessage.ejs', {message:"Not your restaurant"});

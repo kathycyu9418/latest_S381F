@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-
+var subSchema = mongoose.Schema({
+  user: String, score: Number
+}, {_id:false});
 const restaurantSchema = mongoose.Schema(
     {
       restaurant_id: Number,
@@ -16,8 +18,9 @@ const restaurantSchema = mongoose.Schema(
         zipcode: String,
         coord: [Number,Number]
       },
-      grades: [{user: String, score: Number}],
+      grades: [subSchema],
       owner: String
     });
+
 restaurantSchema.index({ "$**": 'text' });
 module.exports = mongoose.model('Restaurants', restaurantSchema)
